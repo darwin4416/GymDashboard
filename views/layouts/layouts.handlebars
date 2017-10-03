@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gym Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-2" style="padding-right: 0;padding-left:0">
+                <div class="top-left">
+                    <h4>Gym Dashboard</h4>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-10" style="padding-right: 0;padding-left:0">
+                <div class="top-nav">
+                    <button type="button" class="btn btn-primary top-btn">Add Member</button>
+                    <button type="button" class="btn btn-success top-btn" data-toggle="modal" data-target="#phone-prompt">Add booking</button>
+                    <button type="button" class="btn btn-info top-btn" data-toggle="modal" data-target="#phone-prompt">Add Lead</button>
+                    <button type="button" class="btn btn-warning top-btn">Enquiries</button>
+                    <button type="button" class="btn btn-danger top-btn">Notifications</button>
+                    <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Modal for phone number -->
+        <div id="phone-prompt" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"> Phone number</h4>
+                    </div>
+                    <div class="modal-body">
+                        +91 <input type="tel" placeholder="__________" id="for-phone-no" maxlength="10">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="checkPhoneNo">Check</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-2" style="padding-right: 0;padding-left:0">  
+            <div id="left-nav">
+                <ul>
+                    <li>
+                        <a href="#"> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#">Members</a>
+                    </li>
+                    <li>
+                        <a href="#">Leads</a>
+                    </li>
+                    <li>
+                        <a href="#">Settings</a>
+                    </li>
+                </ul>
+            </div>
+          </div> 
+          <div class="col-sm-10" style="padding-right: 0;padding-left:0;background-color:#F3E2E2">
+              {{{body}}}
+          </div>
+
+        </div>
+    </div>
+    
+
+<script>
+    
+  $("#checkPhoneNo").click(function(){
+     var phoneNo = $('#for-phone-no').val();
+         $.ajax({
+             url:'/verifyPhone',
+             type:'POST',   
+             dataType: 'json',
+             data: {"phoneNo":phoneNo},
+             success: function(data){
+                 console.log(data);
+                if(data=='true')
+                {
+                    window.location.href="/add-lead";
+                }
+         }
+  });
+  });
+</script>
+
+
+</body>
+
+</html>

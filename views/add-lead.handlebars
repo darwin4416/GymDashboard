@@ -1,0 +1,92 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="well">
+            <span>Lead</span>
+            <div id="btn-cancel">
+                <button type="button" class="btn btn-danger">Cancel</button>
+                <button type="button" class="btn btn-default">Save</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12" style="background-color:#F3E2E2">
+            <div class="user-content">
+                <div class="well">
+                    <p>Personal Details </p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+
+
+                        <div id="user-photo">
+
+                        </div>
+                        <input type="file" id="user-image">
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Email:</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="col-sm-4">
+
+                        <form>
+                            <div class="form-group">
+                                <label for="phone">Phone Number:</label>
+                                <input type="tel" class="form-control" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Gender:</label><br/>
+                                <label class="radio-inline">
+                                     <input type="radio" name="optradio">Male
+                                </label>
+                                <label class="radio-inline">
+                                   <input type="radio" name="optradio">Female
+                                </label>
+                            </div>
+
+
+                        </form>
+                         <div id="btn-cancel">
+                        <button type="button" class="btn btn-danger">Cancel</button>
+                        <button type="button" class="btn btn-default" id="lead-save">Save</button>
+                    </div>
+                    </div>
+                    
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    
+    
+    $("#lead-save").click(function(e){
+        e.preventDefault();
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var phone = $("#phone").val();
+          $.ajax({
+              url: '/add-lead',
+              type:'POST',
+              data: {"name":name,"email":email,"phone":phone},
+              success:function(data){
+                  console.log(data);
+              }
+
+          })
+    });
+
+</script>
